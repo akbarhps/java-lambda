@@ -52,8 +52,54 @@ Sebelum Belajar Materi Ini:
 Contoh:
 
 ```java
+
 @FunctionalInterface
 public interface SimpleAction {
     String action();
+}
+```
+
+---
+
+## <span name="membuat-lambda">Membuat Lambda</span>
+
+- Di seksi sebelumnya kita sudah mencoba membuat lambda
+- Sekarang kita akan bahas beberapa cara membuat lambda lainnya
+
+## Lambda Interface dengan Parameter
+
+```java
+
+@FunctionalInterface
+public interface SimpleActionParam {
+    String action(String name);
+}
+```
+
+## Lambda dengan Parameter
+
+```java
+public class SimpleActionParamApp {
+    public static void main(String[] args) {
+        SimpleActionParam simpleActionParam1 = (String name) -> {
+            return "Hello, " + name;
+        };
+        SimpleActionParam simpleActionParam2 = (name) -> {
+            return "Hello, " + name;
+        };
+    }
+}
+```
+
+## Lambda tanpa Block
+
+```java
+public class SimpleActionParamApp {
+    public static void main(String[] args) {
+        SimpleActionParam simpleActionParam3 = (String name) -> "Hello, " + name;
+        SimpleActionParam simpleActionParam4 = (name) -> "Hello, " + name;
+        SimpleActionParam simpleActionParam5 = name -> "Hello, " + name;
+        SimpleActionParam simpleActionParam6 = param -> "Hello, " + param;
+    }
 }
 ```
