@@ -66,7 +66,7 @@ public interface SimpleAction {
 - Di seksi sebelumnya kita sudah mencoba membuat lambda
 - Sekarang kita akan bahas beberapa cara membuat lambda lainnya
 
-## Lambda Interface dengan Parameter
+### Lambda Interface dengan Parameter
 
 ```java
 
@@ -76,7 +76,7 @@ public interface SimpleActionParam {
 }
 ```
 
-## Lambda dengan Parameter
+### Lambda dengan Parameter
 
 ```java
 public class SimpleActionParamApp {
@@ -91,7 +91,7 @@ public class SimpleActionParamApp {
 }
 ```
 
-## Lambda tanpa Block
+### Lambda tanpa Block
 
 ```java
 public class SimpleActionParamApp {
@@ -103,3 +103,60 @@ public class SimpleActionParamApp {
     }
 }
 ```
+
+---
+
+## <span name="java-util-function">Java Util Function</span>
+
+### Package java.util.function
+
+- Saat Java 8 rilis dengan fitur Lambda-nya, Java juga menyediakan sebuah package baru bernama `java.util.function`
+- Package ini berisikan banyak sekali fitur Functional Interface yang bisa kita gunakan untuk kebutuhan membuat Lambda
+- Dengan menggunakan Interface-Interface yang ada di package ini, kita mungkin tidak perlu lagi membuat Functional
+  Interface secara manual
+
+### Interface Consumer
+
+```java
+public class ConsumerApp {
+    public static void main(String[] args) {
+        Consumer<String> consumer = s -> System.out.println(s);
+        consumer.accept("Hello World!"); // Hello World!
+    }
+}
+```
+
+### Interface Function
+
+```java
+public class FunctionApp {
+    public static void main(String[] args) {
+        Function<String, Integer> function = value -> value.length();
+        System.out.println(function.apply("Hello World!")); // 12
+    }
+}
+```
+
+### Interface Predicate
+
+```java
+public class PredicateApp {
+    public static void main(String[] args) {
+        Predicate<String> predicate = param -> param.isBlank();
+        System.out.println(predicate.test("Hello World!")); // false
+    }
+}
+```
+
+### Interface Supplier
+
+```java
+public class SupplierApp {
+    public static void main(String[] args) {
+        Supplier<String> supplier = () -> "Hello World!";
+        System.out.println(supplier.get()); // Hello World!
+    }
+}
+```
+
+![Interface-Interface lainnya](https://user-images.githubusercontent.com/69947442/129477203-f6f23f38-1315-4eb5-b046-53de5f084bf2.png)
