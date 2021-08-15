@@ -160,3 +160,83 @@ public class SupplierApp {
 ```
 
 ![Interface-Interface lainnya](https://user-images.githubusercontent.com/69947442/129477203-f6f23f38-1315-4eb5-b046-53de5f084bf2.png)
+
+---
+
+## <span name="method-reference">Method Reference</span>
+
+- Kadang saat membuat Lambda, isi Lambda hanya mengakses Method lain atau mengakses Method yang ada di parameter Lambda
+  nya
+- Kita bisa mempersingkat pembuatan Lambda tersebut dengan Method Reference
+
+### Static Method
+
+```java
+public class StringUtilStatic {
+    public static boolean isLowerCase(String param) {
+        for (char c : param.toCharArray()) {
+            if (!Character.isLowerCase(c)) return false;
+        }
+        return true;
+    }
+}
+```
+
+### Method Reference Static
+
+```java
+public class StringUtilStaticApp {
+    public static void main(String[] args) {
+        Predicate<String> predicate = StringUtil::isLowerCase;
+        System.out.println(predicate.test("hello")); // true
+    }
+}
+```
+
+### Method Reference non-Static
+
+```java
+public class StringUtilNonStaticApp {
+    public boolean isLowerCase(String param) {
+        for (char c : param.toCharArray()) {
+            if (!Character.isLowerCase(c)) return false;
+        }
+        return true;
+    }
+
+    public void nonStaticPredicate() {
+        Predicate<String> nonStaticPredicate = this::isLowerCase;
+        System.out.println(nonStaticPredicate.test("hello")); // true
+    }
+}
+```
+
+### Method Reference Object
+
+```java
+public class StringUtilObjectApp {
+    public boolean isLowerCase(String param) {
+        for (char c : param.toCharArray()) {
+            if (!Character.isLowerCase(c)) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        StringUtilApp app = new StringUtilApp();
+        Predicate<String> nonStaticPredicate = app::isLowerCase;
+        System.out.println(nonStaticPredicate.test("hello")); // true
+    }
+}
+```
+
+### Method Reference Parameter
+
+```java
+public class StringUtilParameterApp {
+    public static void main(String[] args) {
+        Function<String, String> functionUpperCase = String::toUpperCase;
+        System.out.println(functionUpperCase.apply("hello kecil")); // HELLO KECIL
+    }
+}
+```
