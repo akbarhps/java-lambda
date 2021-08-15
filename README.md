@@ -28,3 +28,32 @@ Sebelum Belajar Materi Ini:
 - [Lambda di Optional](#lambda-optional)
 
 ---
+
+## <span name="pengenalan-lambda">Pengenalan Lambda</span>
+
+### Apa itu lambda?
+
+- Lambda berasal dari lambda calculus, yang mengacu pada Anonymous Function (fungsi tanpa nama)
+- Tapi, di Java function/method tidak dapat berdiri sendiri
+- Jadi kemungkinan pada prakteknya, lambda di Java dan di bahasa pemrograman lain akan berbeda
+
+### Anonymous Class
+
+- Di Java kita hanya mengenal Anonymous Class
+- Lambda di Java sebenarnya adalah versi sederhana membuat sebuah Anonymous Class
+
+### Syarat Lambda
+
+- Berupa Interface
+- Hanya memiliki 1 method abstract
+- Ditambahkan annotation `@FunctionInterface` pada Interface nya
+- Minimal menggunakan Java 8
+
+Contoh:
+
+```java
+@FunctionalInterface
+public interface SimpleAction {
+    String action();
+}
+```
