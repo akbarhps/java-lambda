@@ -291,3 +291,55 @@ public class MapForEachApp {
 ```
 
 Dan lain-lainnya, selebihnya cek isi Source Code dari Java Collection
+
+---
+
+## <span name="lambda-lazy-parameter">Lambda Sebagai Lazy Parameter</span>
+
+### Lazy Parameter
+
+- Java tidak memiliki fitur Parameter Lazy seperti di bahasa Scala
+- Lazy Parameter artinya, Parameter tersebut hanya akan dieksekusi ketika gunakan
+- Untungnya, dengan menggunakan Lambda kita bisa membuat Parameter layaknya Lazy Parameter
+
+### Bukan Lazy Parameter
+
+```java
+public class NonLazyParameterApp {
+    public static void main(String[] args) {
+        testScoreNonLambda(90, "Akbar");
+    }
+    
+    public static void testScoreNonLambda(int score, String name) {
+        if (score > 80) {
+            System.out.println("Selamat " + name + ", Anda Lulus");
+        } else {
+            System.out.println("Coba Lagi Tahun Depan");
+        }
+    }
+}
+```
+
+### Lazy Parameter
+
+```java
+public class LazyParameterApp {
+    public static void main(String[] args) {
+        testScoreLambda(90, () -> getName());
+        testScoreLambda(90, LazyParameterApp::getName);
+    }
+
+    public static void testScoreLambda(int score, Supplier<String> name) {
+        if (score > 80) {
+            System.out.println("Selamat " + name.get() + ", Anda Lulus");
+        } else {
+            System.out.println("Coba Lagi Tahun Depan");
+        }
+    }
+
+    public static String getName() {
+        System.out.println("function getName() dipanggil");
+        return "Akbar";
+    }
+}
+```
