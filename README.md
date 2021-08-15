@@ -309,7 +309,7 @@ public class NonLazyParameterApp {
     public static void main(String[] args) {
         testScoreNonLambda(90, "Akbar");
     }
-    
+
     public static void testScoreNonLambda(int score, String name) {
         if (score > 80) {
             System.out.println("Selamat " + name + ", Anda Lulus");
@@ -340,6 +340,66 @@ public class LazyParameterApp {
     public static String getName() {
         System.out.println("function getName() dipanggil");
         return "Akbar";
+    }
+}
+```
+
+---
+
+## <span name="lambda-optional">Lambda di Optional</span>
+
+### Optional Class
+
+- Di Java 8 tersedia sebuah class baru bernama `Optional` yang berada di package `java.util`
+- Class ini digunakan sebagai wrapper untuk value yang bisa bernilai null
+- Optional didesain agar kita lebih mudah ketika beroperasi dengan object yang bisa null
+- Karena `NullPointerException` adalah salah satu hal yang sering sekali ditemui oleh Programmer Java
+
+### Menggunakan Optional
+
+```java
+public class OptionalApp {
+    public static void main(String[] args) {
+        sayHello("Akbar");
+        sayHello(null);
+    }
+
+    public static void sayHello(String name) {
+        Optional<String> optionalName = Optional.ofNullable(name);
+
+        // anonymous class
+        Optional<String> optionalUpperAnon = optionalName.map(new Function<String, String>() {
+            @Override
+            public String apply(String name) {
+                return name.toUpperCase();
+            }
+        });
+
+        // lambda
+        Optional<String> optionalUpperLambda = optionalName.map(name1 -> name1.toUpperCase());
+
+        // method reference
+        Optional<String> optionalUpperMethodRef = optionalName.map(String::toUpperCase);
+
+        optionalUpperMethodRef.ifPresent(nameUpper -> System.out.println("Hello, " + nameUpper));
+    }
+}
+```
+
+### Mengambil Data Optional
+
+```java
+public class DataOptionalApp {
+    public static void main(String[] args) {
+        sayHello("Akbar");
+        sayHello(null);
+    }
+
+    public static void sayHello(String name) {
+        String nameUpperCase = Optional.ofNullable(name)
+                .map(String::toUpperCase)
+                .orElseGet(() -> "Tanpa Nama");
+        System.out.println("Hello, " + nameUpperCase);
     }
 }
 ```
