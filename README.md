@@ -240,3 +240,54 @@ public class StringUtilParameterApp {
     }
 }
 ```
+
+---
+
+## <span name="lambda-collection">Lambda di Collection</span>
+
+- Saat fitur Lambda rilis di Java 8, ada banyak sekali Default Method yang ditambahkan ke Java Collection
+- Beberapa ada Default Method yang banyak memanfaatkan fitur Lambda
+- Di materi ini akan bahas beberapa Method yang memanfaatkan Lambda
+
+### Iterable.forEach
+
+```java
+public class ForEachApp {
+    public static void main(String[] args) {
+        List<String> names = List.of("Akbar", "Hasadi", "Putra", "Siregar");
+        names.forEach(name -> System.out.println(name));
+        names.forEach(System.out::println);
+    }
+}
+```
+
+### Collection.removeIf
+
+```java
+public class RemoveIfApp {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>(
+                List.of("Akbar", "Hasadi", "Putra", "Siregar")
+        );
+        names.removeIf(name -> name.length() > 5);
+    }
+}
+```
+
+### Map.forEach
+
+```java
+public class MapForEachApp {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>(Map.of(
+                "Akbar", 1,
+                "Hasadi", 2,
+                "Putra", 3,
+                "Siregar", 4
+        ));
+        map.forEach((first, second) -> System.out.println(first + " " + second));
+    }
+}
+```
+
+Dan lain-lainnya, selebihnya cek isi Source Code dari Java Collection
